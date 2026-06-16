@@ -8,6 +8,9 @@ from werkzeug.utils import secure_filename
 import os
 import librosa
 import numpy as np
+import numba
+print("LIBROSA VERSION:", librosa.__version__)
+print("NUMBA VERSION:", numba.__version__)
 from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
