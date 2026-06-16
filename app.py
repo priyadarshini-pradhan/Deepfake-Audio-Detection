@@ -38,6 +38,7 @@ def predict():
 
     # Feature Extraction
     audio, sr = librosa.load(filepath, sr=16000, duration=5)
+    print("Audio loaded")
     plt.figure(figsize=(10,3))
     plt.plot(audio)
     plt.title("Audio Waveform")
@@ -50,11 +51,13 @@ def predict():
     plt.close()
 
     mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=40)
+    print("MFCC extracted")
     mfcc = np.mean(mfcc.T, axis=0)
     mfcc = mfcc.reshape(1, 40, 1)
 
     # Prediction
     prediction = model.predict(mfcc)
+    print("Predicting...")
 
     label = np.argmax(prediction)
     confidence = round(float(np.max(prediction)) * 100, 2)
