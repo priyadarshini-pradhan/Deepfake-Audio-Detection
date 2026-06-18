@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>DeepFake Audio Detection</title>
-
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -56,9 +56,8 @@
 
         <h3>Waveform</h3>
 
-        <img src="{{ url_for('static', filename=waveform_image) }}"
-            width="100%">
->
+        <img src="{{ url_for('static', filename=waveform_image) }}" width="100%">
+
     </div>
 
     {% endif %}

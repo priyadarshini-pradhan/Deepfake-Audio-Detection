@@ -12,7 +12,7 @@ import numpy as np
 import librosa
 import soundfile as sf
 import tensorflow as tf
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 
 # -----------------------------
 # Flask App Configuration
@@ -33,7 +33,7 @@ model = load_model(MODEL_PATH, compile=False)
 
 print("Model Loaded Successfully!")
 print("Output Shape:", model.output_shape)
-
+print(type(model))
 
 # -----------------------------
 # Home Page
@@ -88,8 +88,12 @@ def predict():
         plt.xlabel("Samples")
         plt.ylabel("Amplitude")
 
-        waveform_path = os.path.join("static", "waveform.png")
-        plt.savefig(waveform_path)
+        waveform_filename = "waveform.png"
+        waveform_path = os.path.join(app.static_folder, waveform_filename)
+
+        plt.savefig(waveform_path, bbox_inches="tight")
+        print("Waveform saved:", os.path.exists(waveform_path))
+        print("Saved at:", waveform_path)
         plt.close()
 
         # -----------------------------
@@ -131,7 +135,7 @@ def predict():
             prediction=result,
             confidence=confidence,
             audio_file=audio_file,
-            waveform_image="waveform.png",
+            waveform_image=waveform_filename,
         )
 
     except Exception as e:
