@@ -1,4 +1,5 @@
 import os
+import traceback
 os.environ["NUMBA_DISABLE_JIT"] = "1"
 
 import matplotlib
@@ -138,8 +139,9 @@ def predict():
             waveform_image=waveform_filename,
         )
 
-    except Exception as e:
-        return f"Error: {str(e)}"
+    except Exception:
+        traceback.print_exc()
+        return f"<pre>{traceback.format_exc()}</pre>"
 
 
 # -----------------------------
